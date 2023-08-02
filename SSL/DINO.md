@@ -34,7 +34,7 @@
 - 作者使用了一个类似 self-distillation 的方式来训练模型。具体来说，作者使用一个 momentum Teacher 模型来指导 Student 模型的训练。
 
     <p align='center'>
-    <img src="../src/img/DINO/self_supervised_learning.png" width="250" height="200" alt="self distillation with no label"/>
+    <img src="src/img/DINO/self_supervised_learning.png" width="250" height="200" alt="self distillation with no label"/>
     </p>
 
 - 为了进行 self-supervised training，作者使用了 [multi-crop strategy](https://arxiv.org/abs/2006.09882) 对输入图像进行处理。具体来说，作者定义了两种 distorted views:   
@@ -71,7 +71,7 @@
     - projection head 用于在预训练阶段学习特征（并不用于下游任务）。具体来说，它由一个有3个 layer 的 MLP 组成，其中 hidden layer 的维度为 2048，输出层是一个维度为 K 的 weight normalized fully connected layer。（作者测试了不同的 projection head，发现这个结构的DINO表现最好）
 
     <p align='center'>
-    <img src="../src/img/DINO/projection_head.png" width="220" height="160" alt="projection head"/>
+    <img src="src/img/DINO/projection_head.png" width="220" height="160" alt="projection head"/>
     </p>
 
     - 由于 ViT 结构没有使用 batch normalization（BN），因此作者在训练 ViT 时没有使用 BN。（使用 BN 会导致模型性能下降～1%）对于 ResNet，作者使用 BN。
@@ -114,7 +114,7 @@
     \end{aligned}$$  
 
     <p align='center'>
-    <img src="../src/img/DINO/collapse_study.png" width="400" height="200" alt="collapse study"/>
+    <img src="src/img/DINO/collapse_study.png" width="400" height="200" alt="collapse study"/>
     </p>
 
     - 如果 KL divergence 为 0，那么意味着 Teacher 和 Student 的输出分布相同，因此在 knowledge distillation 训练框架下将不会有任何的信息传递和梯度更新，即模型会 collapse。如上右图所示，当仅使用 centering 或 sharpening 时，KL divergence 为 0，因此模型会 collapse。
