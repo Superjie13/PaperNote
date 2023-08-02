@@ -114,7 +114,7 @@
     \end{aligned}$$  
 
     <p align='center'>
-    <img src="../src/img/DINO/collapse_study.png" width="200" height="200" alt="collapse study"/>
+    <img src="../src/img/DINO/collapse_study.png" width="400" height="200" alt="collapse study"/>
     </p>
 
     - 如果 KL divergence 为 0，那么意味着 Teacher 和 Student 的输出分布相同，因此在 knowledge distillation 训练框架下将不会有任何的信息传递和梯度更新，即模型会 collapse。如上右图所示，当仅使用 centering 或 sharpening 时，KL divergence 为 0，因此模型会 collapse。
