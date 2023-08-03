@@ -33,9 +33,9 @@
 #### Self-Supervised Learning
 - 作者使用了一个类似 self-distillation 的方式来训练模型。具体来说，作者使用一个 momentum Teacher 模型来指导 Student 模型的训练。
 
-    <p align='center'>
-    <img src="../src/img/DINO/self_supervised_learning.png" width="250" height="200" alt="self distillation with no label"/>
-    </p>
+<p align='center'>
+<img src="../src/img/DINO/self_supervised_learning.png" width="250" height="200" alt="self distillation with no label"/>
+</p>
 
 - 为了进行 self-supervised training，作者使用了 [multi-crop strategy](https://arxiv.org/abs/2006.09882) 对输入图像进行处理。具体来说，作者定义了两种 distorted views:   
 [1]. global views: two views ($x_1^g$, $x_2^g$), croped size > 50% of original size.  
@@ -106,16 +106,16 @@
     </center>
 
 - 此外，作者通过将 cross-entropy loss 分解为 entropy 和 KL divergence 来进一步分析 Centering 和 Sharpening 的协作。
+
+    <p align='center'>
+    <img src="../src/img/DINO/collapse_study.png" width="400" height="200" alt="collapse study"/>
+    </p>
     
     $$\begin{aligned}
     \mathbf{H}(P_t(x), P_s(x)) &= -\sum P_t(x)\log P_s(x) \\
     & = -\sum P_t(x) \log P_t(x) + \sum P_t(x) \log \frac{P_t(x)}{P_s(x)} \\
     & = \mathbf{H}(P_t(x)) + \mathbf{KL}(P_t(x), P_s(x))
     \end{aligned}$$  
-
-    <p align='center'>
-    <img src="../src/img/DINO/collapse_study.png" width="400" height="200" alt="collapse study"/>
-    </p>
 
     - 如果 KL divergence 为 0，那么意味着 Teacher 和 Student 的输出分布相同，因此在 knowledge distillation 训练框架下将不会有任何的信息传递和梯度更新，即模型会 collapse。如上右图所示，当仅使用 centering 或 sharpening 时，KL divergence 为 0，因此模型会 collapse。
     - 另一方面，$\mathbf{H}(P_t(x))=-\sum P_t(x) \log P_t(x)$，上左图显示了当仅使用 sharpening 时，Teacher 模型的 Target Entropy 会收敛到 0；这意味着 Teacher 的输出受某一维度的主导，从而导致模型 collapse。
